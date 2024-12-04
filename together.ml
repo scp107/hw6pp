@@ -8,16 +8,15 @@ let maxAbsoluteVal lst =
   in
   helper lst 0  
 
-let getnthdigit num n =
-  let rec helper num n length =
-    match num with
-    | 0 -> -1  
-    | _ when length = n -> num mod 10  
-    | _ -> helper (num / 10) n (length + 1)  
-  in
-  let num_length = String.length (string_of_int num) in
-  if n > num_length || n <= 0 then -1  
-  else helper num n 1  
+let getnthdigit number n =
+  if number = 0 && n = 1 then 0
+  else
+    let digits = string_of_int (abs number) in
+    if n > 0 && n <= String.length digits then
+      int_of_char (digits.[n - 1]) - int_of_char '0'
+    else
+      failwith "Index out of bounds"
+
 
 let psum lst =
   let rec helper lst acc =
